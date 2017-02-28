@@ -16,6 +16,8 @@ exports.getSidebarItem = function() {
 	return {  
       "name": "Clusters",
       "path": PATH,
-      "link": HTML_LINK
+      "link": HTML_LINK,
+      "category": "Operate",
+      "order": 401
    };
 };
