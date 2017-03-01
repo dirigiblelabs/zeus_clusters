@@ -10,7 +10,7 @@ exports.getSettings = function() {
 	}
 	
 	return {
-		'server': 'https://api.' + clusterDefault.cluster_region +  '.' + clusterDefault.cluster_account + '.' + clusterDefault.cluster_domain,
+		'server': clusterDefault.cluster_url,
 		'token': clusterDefault.cluster_token,
 		'namespace': clusterDefault.cluster_namespace
 	};
