@@ -6,7 +6,6 @@ var response = require('net/http/response');
 var xss = require('utils/xss');
 var clustersDao = require('zeus/clusters/dao/clustersDao');
 
-
 handleRequest(request, response, xss);
 
 function handleRequest(httpRequest, httpResponse, xss) {
@@ -75,6 +74,7 @@ function handleGetRequest(httpRequest, httpResponse, xss) {
 
 function handlePostRequest(httpRequest, httpResponse) {
     var entity = getRequestBody(httpRequest);
+    console.error(entity);
     var id = clustersDao.create(entity);
     sendResponse(httpResponse, httpResponse.CREATED, 'text/plain', id);
 }

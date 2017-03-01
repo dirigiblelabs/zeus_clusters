@@ -133,7 +133,8 @@
 		angular.module('page', ['ngAnimate', 'ui.bootstrap']);
 		angular.module('page').controller('ManageController', function ($scope, $http) {
 			
-			var url = '../../../js/zeus/clusters//clusters.js';
+			var url = '../../../js/zeus/clusters/clusters.js';
+			var urlAutoDiscovery = '../../../js/zeus/clusters/autodiscovery.js';
 
 			$http.get(url)
 				.success(function(data){
@@ -296,8 +297,6 @@
 			};
 			$scope.formats = ['yyyy/MM/dd', 'dd-MMMM-yyyy', 'dd.MM.yyyy', 'shortDate'];
   			$scope.format = $scope.formats[0];
-
-			
 			
 			//pagination
 			$scope.viewby = 100;
@@ -331,7 +330,13 @@
 			
 			
 			$scope.autoDiscoverAction = function() {
-                alert("Auto Discover has been triggered");
+				$http.get(urlAutoDiscovery).success(function(data) {
+					$scope.selectedEntry = $scope.selectedEntry !== null ? $scope.selectedEntry : {};
+					$scope.selectedEntry.cluster_token = data.token;
+					$scope.selectedEntry.cluster_url = data.server;
+				}).error(function(data) {
+					$scope.errorMessage = data.errorMessage;
+				});
             };
 			
 		});

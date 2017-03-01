@@ -10,7 +10,7 @@ var user = require("net/http/user");
 exports.create = function(entity) {
     var connection = datasource.getConnection();
     try {
-        var sql = 'INSERT INTO ZEUS_CLUSTERS (CLUSTER_ID,CLUSTER_ACCOUNT,CLUSTER_NAMESPACE,CLUSTER_URL,CLUSTER_DEFAULT,CLUSTER_TOKEN,CLUSTER_INITIATED_AT,CLUSTER_INITIATED_BY) VALUES (?,?,?,?,?,?,?,?,?,?)';
+        var sql = 'INSERT INTO ZEUS_CLUSTERS (CLUSTER_ID,CLUSTER_ACCOUNT,CLUSTER_NAMESPACE,CLUSTER_URL,CLUSTER_DEFAULT,CLUSTER_TOKEN,CLUSTER_INITIATED_AT,CLUSTER_INITIATED_BY) VALUES (?,?,?,?,?,?,?,?)';
         var statement = connection.prepareStatement(sql);
         var i = 0;
         var id = datasource.getSequence('ZEUS_CLUSTERS_CLUSTER_ID').next();
