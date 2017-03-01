@@ -21,28 +21,19 @@
       }
       ,
       {
-        "name":"CLUSTER_REGION",
-        "type":"VARCHAR",
-        "length":"32",
-        "notNull":"true",
-        "primaryKey":"false",
-        "defaultValue":""
-      }
-      ,
-      {
-        "name":"CLUSTER_DOMAIN",
-        "type":"VARCHAR",
-        "length":"100",
-        "notNull":"true",
-        "primaryKey":"false",
-        "defaultValue":""
-      }
-      ,
-      {
         "name":"CLUSTER_NAMESPACE",
         "type":"VARCHAR",
         "length":"200",
         "notNull":"true",
+        "primaryKey":"false",
+        "defaultValue":""
+      }
+      ,
+      {
+        "name":"CLUSTER_URL",
+        "type":"VARCHAR",
+        "length":"200",
+        "notNull":"false",
         "primaryKey":"false",
         "defaultValue":""
       }

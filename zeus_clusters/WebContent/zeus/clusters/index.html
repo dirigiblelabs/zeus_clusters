@@ -9,7 +9,6 @@
 	
 	<title>Clusters</title>
 	
-	
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -32,9 +31,8 @@
 					<tr>
 						<th>#</th>
 						<th>Account</th>
-						<th>Region</th>
-						<th>Domain</th>
 						<th>Namespace</th>
+						<th>URL</th>
 						<th>Default?</th>
 						<th>Initiated At</th>
 						<th>Initiated By</th>
@@ -45,9 +43,8 @@
 						ng-click="showInfoForEntry(entry)">
 						<td>{{entry.cluster_id}}</td>
 						<td>{{entry.cluster_account}}</td>
-						<td>{{entry.cluster_region}}</td>
-						<td>{{entry.cluster_domain}}</td>
 						<td>{{entry.cluster_namespace}}</td>
+						<td>{{entry.cluster_url}}</td>
 						<td>{{entry.cluster_default}}</td>
 						<td>{{entry.cluster_initiated_at}}</td>
 						<td>{{entry.cluster_initiated_by}}</td>
@@ -62,13 +59,13 @@
 			<br>
 			<!-- new, edit and delete buttons -->
 			<div class="btn-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<input class="btn btn-default" type="button" value="New"
+				<input class="btn btn-default btn-sm" type="button" value="New"
 					ng-click="setOperation('new')"
 					ng-disabled="errorMessage || operation == 'new' || operation == 'update'"> <input
-					class="btn btn-default" type="button" value="Edit"
+					class="btn btn-default btn-sm" type="button" value="Edit"
 					ng-click="setOperation('update')"
 					ng-disabled="errorMessage || operation == 'new' || operation == 'update'"> <input
-					class="btn btn-default" type="button" value="Delete"
+					class="btn btn-default btn-sm" type="button" value="Delete"
 					ng-click="delete()"
 					ng-disabled="errorMessage || operation == 'new' || operation == 'update'">
 			</div>
@@ -76,7 +73,6 @@
 			<div>
 				<!-- input form -->
 				<div>
-				  
 				  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 					<label>#</label>
 					<input type="text" class="form-control" 
@@ -88,22 +84,16 @@
 						ng-model="selectedEntry.cluster_account"
 						ng-readonly="operation == 'show'" required="required">
 				  </div>
-				  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-					<label>Region</label>
-					<input type="text" class="form-control" 
-						ng-model="selectedEntry.cluster_region"
-						ng-readonly="operation == 'show'" required="required">
-				  </div>
-				  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<label>Domain</label>
-					<input type="text" class="form-control" 
-						ng-model="selectedEntry.cluster_domain"
-						ng-readonly="operation == 'show'" required="required">
-				  </div>
 				  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<label>Namespace</label>
 					<input type="text" class="form-control" 
 						ng-model="selectedEntry.cluster_namespace"
+						ng-readonly="operation == 'show'" required="required">
+				  </div>
+				  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<label>URL</label>
+					<input type="text" class="form-control" 
+						ng-model="selectedEntry.cluster_url"
 						ng-readonly="operation == 'show'" required="required">
 				  </div>
 				  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -123,10 +113,12 @@
 				<!-- save and cancel buttons -->
 				<div class="btn-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<br>
-					<input class="btn btn-primary" type="button" value="Save" ng-show="operation == 'new' || operation == 'update'"
+					<input class="btn btn-primary btn-sm" type="button" value="Save" ng-show="operation == 'new' || operation == 'update'"
 						ng-click="confirmAction()"> 
-					<input class="btn btn-default" type="button" value="Cancel" ng-show="operation == 'new' || operation == 'update'"
+					<input class="btn btn-default btn-sm" type="button" value="Cancel" ng-show="operation == 'new' || operation == 'update'"
 						ng-click="cancelAction()">
+					<input class="btn btn-danger btn-sm pull-right" type="button" value="Auto Discover" ng-show="operation == 'new' || operation == 'update'"
+						ng-click="autoDiscoverAction()"> 
 				</div>
 			</div>
 		</div>
@@ -336,6 +328,12 @@
 			  	$scope.itemsPerPage = num;
 			  	$scope.setPage(1);
 			}
+			
+			
+			$scope.autoDiscoverAction = function() {
+                alert("Auto Discover has been triggered");
+            };
+			
 		});
 		
 	</script>

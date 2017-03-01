@@ -10,15 +10,14 @@ var user = require("net/http/user");
 exports.create = function(entity) {
     var connection = datasource.getConnection();
     try {
-        var sql = 'INSERT INTO ZEUS_CLUSTERS (CLUSTER_ID,CLUSTER_ACCOUNT,CLUSTER_REGION,CLUSTER_DOMAIN,CLUSTER_NAMESPACE,CLUSTER_DEFAULT,CLUSTER_TOKEN,CLUSTER_INITIATED_AT,CLUSTER_INITIATED_BY) VALUES (?,?,?,?,?,?,?,?,?)';
+        var sql = 'INSERT INTO ZEUS_CLUSTERS (CLUSTER_ID,CLUSTER_ACCOUNT,CLUSTER_NAMESPACE,CLUSTER_URL,CLUSTER_DEFAULT,CLUSTER_TOKEN,CLUSTER_INITIATED_AT,CLUSTER_INITIATED_BY) VALUES (?,?,?,?,?,?,?,?,?,?)';
         var statement = connection.prepareStatement(sql);
         var i = 0;
         var id = datasource.getSequence('ZEUS_CLUSTERS_CLUSTER_ID').next();
         statement.setInt(++i, id);
         statement.setString(++i, entity.cluster_account);
-        statement.setString(++i, entity.cluster_region);
-        statement.setString(++i, entity.cluster_domain);
         statement.setString(++i, entity.cluster_namespace);
+        statement.setString(++i, entity.cluster_url);
         statement.setInt(++i, entity.cluster_default);
         statement.setString(++i, entity.cluster_token);
         statement.setTimestamp(++i, new Date());
@@ -85,13 +84,12 @@ exports.list = function(limit, offset, sort, desc) {
 exports.update = function(entity) {
     var connection = datasource.getConnection();
     try {
-        var sql = 'UPDATE ZEUS_CLUSTERS SET   CLUSTER_ACCOUNT = ?, CLUSTER_REGION = ?, CLUSTER_DOMAIN = ?, CLUSTER_NAMESPACE = ?, CLUSTER_DEFAULT = ?, CLUSTER_TOKEN = ? WHERE CLUSTER_ID = ?';
+        var sql = 'UPDATE ZEUS_CLUSTERS SET   CLUSTER_ACCOUNT = ?, CLUSTER_NAMESPACE = ?, CLUSTER_URL = ?, CLUSTER_DEFAULT = ?, CLUSTER_TOKEN = ? WHERE CLUSTER_ID = ?';
         var statement = connection.prepareStatement(sql);
         var i = 0;
         statement.setString(++i, entity.cluster_account);
-        statement.setString(++i, entity.cluster_region);
-        statement.setString(++i, entity.cluster_domain);
         statement.setString(++i, entity.cluster_namespace);
+        statement.setString(++i, entity.cluster_url);
         statement.setInt(++i, entity.cluster_default);
         statement.setString(++i, entity.cluster_token);
         statement.setInt(++i, entity.cluster_id);
@@ -152,15 +150,11 @@ exports.metadata = function() {
 			type: 'string'
 		},
 		{
-			name: 'cluster_region',
-			type: 'string'
-		},
-		{
-			name: 'cluster_domain',
-			type: 'string'
-		},
-		{
 			name: 'cluster_namespace',
+			type: 'string'
+		},
+		{
+			name: 'cluster_url',
 			type: 'string'
 		},
 		{
@@ -189,9 +183,8 @@ function createEntity(resultSet) {
     var result = {};
 	result.cluster_id = resultSet.getInt('CLUSTER_ID');
     result.cluster_account = resultSet.getString('CLUSTER_ACCOUNT');
-    result.cluster_region = resultSet.getString('CLUSTER_REGION');
-    result.cluster_domain = resultSet.getString('CLUSTER_DOMAIN');
     result.cluster_namespace = resultSet.getString('CLUSTER_NAMESPACE');
+    result.cluster_url = resultSet.getString('CLUSTER_URL');
 	result.cluster_default = resultSet.getInt('CLUSTER_DEFAULT');
     result.cluster_token = resultSet.getString('CLUSTER_TOKEN');
     if (resultSet.getTimestamp('CLUSTER_INITIATED_AT') !== null) {
