@@ -201,7 +201,7 @@ exports.getDefault = function() {
 	var entity = null;
     var connection = datasource.getConnection();
     try {
-        var sql = 'SELECT * FROM ZEUS_CLUSTERS WHERE CLUSTER_DEFAULt = 1';
+        var sql = 'SELECT * FROM ZEUS_CLUSTERS WHERE CLUSTER_DEFAULT = 1';
         var statement = connection.prepareStatement(sql);
 
         var resultSet = statement.executeQuery();
