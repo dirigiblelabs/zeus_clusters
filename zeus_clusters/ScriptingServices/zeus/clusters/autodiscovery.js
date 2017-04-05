@@ -10,7 +10,7 @@ var statusCode;
 
 try {
 	var token = files.readText('/var/run/secrets/kubernetes.io/serviceaccount/token');
-	var server = 'https://kubernetes.default/api';
+	var server = 'https://kubernetes.default';
 	var httpResponse = httpClient.get(server, {
 		headers: [{
 			name: "Authorization",
